@@ -4,37 +4,24 @@ import pandas as pd
 import streamlit as st
 
 """
-# Welcome to Streamlit!
+# YumSum!!!
 
-Edit `/streamlit_app.py` to customize this app to your heart's desire :heart:.
-If you have any questions, checkout our [documentation](https://docs.streamlit.io) and [community
-forums](https://discuss.streamlit.io).
+
 
 In the meantime, below is an example of what you can do with just a few lines of code:
 """
 
-num_points = st.slider("Number of points in spiral", 1, 10000, 1100)
-num_turns = st.slider("Number of turns in spiral", 1, 300, 31)
+cuisine = st.text_input('Cuisine')
+location = st.text_input('Location')
+numberOfResults = st.number_input('Results', min_value = 1, max_value = 5, value = 1)
 
-indices = np.linspace(0, 1, num_points)
-theta = 2 * np.pi * num_turns * indices
-radius = indices
+done = st.button("Done", use_container_width= True)
+reset = st.button("Reset", use_container_width=True) 
 
-x = radius * np.cos(theta)
-y = radius * np.sin(theta)
+if(done):
+    st.write("You want ", numberOfResults)
+    st.write(location)
+    st.write(cuisine)
 
-df = pd.DataFrame({
-    "x": x,
-    "y": y,
-    "idx": indices,
-    "rand": np.random.randn(num_points),
-})
 
-st.altair_chart(alt.Chart(df, height=700, width=700)
-    .mark_point(filled=True)
-    .encode(
-        x=alt.X("x", axis=None),
-        y=alt.Y("y", axis=None),
-        color=alt.Color("idx", legend=None, scale=alt.Scale()),
-        size=alt.Size("rand", legend=None, scale=alt.Scale(range=[1, 150])),
-    ))
+
